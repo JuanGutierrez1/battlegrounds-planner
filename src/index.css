@@ -104,6 +104,12 @@ button {
   min-height: 0;
 }
 
+/* Columna derecha: tablero + composiciones, con scroll propio */
+.app__workspace {
+  min-height: 0;
+  overflow-y: auto;
+}
+
 /* ---------- Lista de esbirros ---------- */
 
 .minion-list {
@@ -339,16 +345,34 @@ button {
   background: radial-gradient(ellipse 55% 35% at 40% 18%, rgba(255, 255, 255, 0.28), transparent 70%);
 }
 
+.minion-icon--small {
+  --frame: 3px;
+  width: 44px;
+  height: 58px;
+}
+
+/* Gema dorada: el esbirro es clave en alguna composición */
+.minion-icon__key {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  border: 1.5px solid #2b2117;
+  border-radius: 3px;
+  background: radial-gradient(circle at 35% 30%, #fff1b0, #e6b325 50%, #8a5c00);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
 /* ---------- Tablero ---------- */
 
 .board {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 24px;
   padding: 24px;
-  overflow: auto;
 }
 
 .board__header {
@@ -552,6 +576,175 @@ button {
 
 .card-image__fallback p {
   margin: 0;
+}
+
+/* Composiciones en las que aparece el esbirro, debajo de la carta */
+.card-preview__comps {
+  list-style: none;
+  margin: 4px 8px 0;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: rgba(20, 16, 12, 0.95);
+  font-size: 0.75rem;
+}
+
+.card-preview__comp {
+  display: flex;
+  gap: 4px;
+  line-height: 22px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-preview__comp > span:first-child {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.card-preview__tier {
+  margin-left: auto;
+  color: var(--text-dim);
+  font-weight: 700;
+}
+
+/* ---------- Composiciones ---------- */
+
+.comps {
+  padding: 8px 24px 32px;
+}
+
+.comps__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+  margin-bottom: 14px;
+}
+
+.comps__header h2 {
+  margin: 0;
+  font-family: 'Lilita One', system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+}
+
+.comps__header p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.comps__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 12px;
+}
+
+.comp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+}
+
+.comps__empty {
+  margin: 0;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px dashed var(--border);
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.comp__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.comp__header h3 {
+  flex: 1;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Badge de tier al estilo tier list */
+.comp__tier {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  font-family: 'Lilita One', system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #fff;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
+  paint-order: stroke fill;
+  background: #6b6357;
+}
+
+.comp__tier--S {
+  background: linear-gradient(160deg, #ffcf4a, #d4870f);
+}
+
+.comp__tier--A {
+  background: linear-gradient(160deg, #7ad36a, #2f8a3a);
+}
+
+.comp__tier--B {
+  background: linear-gradient(160deg, #5aa9e6, #2b5f9e);
+}
+
+.comp__tier--C {
+  background: linear-gradient(160deg, #b07ad8, #6a3a99);
+}
+
+.comp__difficulty {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.comp__summary {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.comp__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.comp__cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.comp__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.comp__card:hover .minion-icon {
+  transform: translateY(-2px) scale(1.06);
+}
+
+.comp__card .minion-icon {
+  transition: transform 0.12s ease;
 }
 
 @keyframes card-preview-in {

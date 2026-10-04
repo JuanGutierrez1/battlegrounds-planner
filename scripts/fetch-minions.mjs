@@ -37,6 +37,7 @@ const minions = [...byLang.en.values()]
   .filter((c) => c.isBattlegroundsPoolMinion && c.type === 'MINION')
   .map((c) => ({
     id: c.id,
+    dbfId: c.dbfId,
     name: localized(c.id, 'name'),
     tier: c.techLevel,
     attack: c.attack ?? 0,

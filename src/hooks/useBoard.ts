@@ -51,5 +51,9 @@ export function useBoard() {
 
   const clear = () => setBoard(emptyBoard())
 
-  return { board, add, place, remove, move, clear }
+  /** Reemplaza el tablero por estos esbirros (los que sobren de 7 se ignoran). */
+  const load = (ids: string[]) =>
+    setBoard(emptyBoard().map((_, i) => (ids[i] && MINIONS_BY_ID.has(ids[i]) ? ids[i] : null)))
+
+  return { board, add, place, remove, move, clear, load }
 }

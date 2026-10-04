@@ -27,7 +27,53 @@ const MESSAGES = {
   },
   dropToRemove: { es: 'Soltá para quitar la carta del tablero.', en: 'Release to remove the card from the board.' },
   language: { es: 'Idioma', en: 'Language' },
-} satisfies Record<string, Localized>
+  comps: { es: 'Composiciones', en: 'Comps' },
+  compsSource: {
+    es: 'Tier list de HSReplay · actualizada el {date}',
+    en: 'HSReplay tier list · updated {date}',
+  },
+  compsEmpty: {
+    es: 'Todavía no importaste comps. Abrí hsreplay.net/battlegrounds/comps, guardala con Ctrl+S y corré: npm run import-comps -- "<archivo guardado>"',
+    en: 'No comps imported yet. Open hsreplay.net/battlegrounds/comps, save it with Ctrl+S and run: npm run import-comps -- "<saved file>"',
+  },
+  difficulty1: { es: 'Fácil', en: 'Easy' },
+  difficulty2: { es: 'Media', en: 'Medium' },
+  difficulty3: { es: 'Difícil', en: 'Hard' },
+  viewGuide: { es: 'Ver guía', en: 'View guide' },
+  keyCards: { es: 'Clave', en: 'Key' },
+  loadComp: { es: 'Cargar en el tablero', en: 'Load on board' },
+  keyIn: { es: 'Clave en', en: 'Key in' },
+  overlayTavern: { es: 'Taberna', en: 'Tavern' },
+  overlayRecruit: { es: 'Reclutamiento', en: 'Recruit' },
+  overlayCombat: { es: 'Combate', en: 'Combat' },
+  overlayTurn: { es: 'turno {n}', en: 'turn {n}' },
+  overlayCombatHint: {
+    es: 'En combate: la taberna se actualiza en el próximo turno.',
+    en: 'In combat: the tavern updates next turn.',
+  },
+  overlayForYou: { es: 'tu comp', en: 'your comp' },
+  overlayMoreComps: { es: '+{n} comps más', en: '+{n} more comps' },
+  overlayYourComps: { es: 'Tus comps posibles', en: 'Your possible comps' },
+  overlayYourCompsEmpty: {
+    es: 'Cuando tengas esbirros en el tablero o la mano, te sugiero comps.',
+    en: 'Once you have minions on board or in hand, comps will be suggested.',
+  },
+  overlayKeyCount: { es: '{owned}/{total} clave', en: '{owned}/{total} key' },
+  overlayWaiting: { es: 'Esperando una partida de Battlegrounds…', en: 'Waiting for a Battlegrounds game…' },
+  overlayNoInstall: {
+    es: 'No encontré Hearthstone. Si está en otra carpeta, definí la variable HEARTHSTONE_PATH.',
+    en: 'Hearthstone not found. If it is installed elsewhere, set the HEARTHSTONE_PATH variable.',
+  },
+  overlayNoLogConfig: {
+    es: 'Hearthstone no está guardando el log de la partida, que es lo que lee el overlay.',
+    en: 'Hearthstone is not writing the game log the overlay reads.',
+  },
+  overlayEnableLogs: { es: 'Activar el log', en: 'Enable the log' },
+  overlayRestartHint: {
+    es: 'Después reiniciá Hearthstone para que tome el cambio.',
+    en: 'Then restart Hearthstone for the change to apply.',
+  },
+  overlayClose: { es: 'Cerrar overlay', en: 'Close overlay' },} satisfies Record<string, Localized>
 
 export type MessageKey = keyof typeof MESSAGES
 

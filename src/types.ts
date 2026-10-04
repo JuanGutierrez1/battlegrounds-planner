@@ -16,6 +16,8 @@ export type Tribe =
 
 export interface Minion {
   id: string
+  /** Id numérico de la carta; HSReplay referencia las cartas así. */
+  dbfId: number
   name: Localized
   tier: number
   attack: number

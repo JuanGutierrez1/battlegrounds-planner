@@ -8,7 +8,9 @@ import {
   type MouseEvent,
   type ReactNode,
 } from 'react'
+import { compName, COMPS_BY_MINION, tierLabel } from '../data/comps'
 import { MINIONS_BY_ID } from '../data/minions'
+import { useI18n } from '../i18n'
 import { CardImage } from './CardImage'
 
 const CARD_WIDTH = 250
@@ -28,28 +30,43 @@ interface PreviewApi {
 
 const PreviewContext = createContext<PreviewApi | null>(null)
 
+/** Alto aproximado de cada línea de comps bajo la carta, para calcular la posición. */
+const COMP_LINE_HEIGHT = 22
+
 /** Calcula dónde ubicar la carta: a la derecha del elemento, si no entra a la izquierda. */
-function position(anchor: DOMRect) {
+function position(anchor: DOMRect, height: number) {
   let left = anchor.right + GAP
   if (left + CARD_WIDTH > window.innerWidth - MARGIN) left = anchor.left - GAP - CARD_WIDTH
   left = Math.max(MARGIN, left)
 
-  const centered = anchor.top + anchor.height / 2 - CARD_HEIGHT / 2
-  const top = Math.min(Math.max(MARGIN, centered), window.innerHeight - CARD_HEIGHT - MARGIN)
+  const centered = anchor.top + anchor.height / 2 - height / 2
+  const top = Math.min(Math.max(MARGIN, centered), window.innerHeight - height - MARGIN)
   return { left, top }
 }
 
 function CardPreview({ id, anchor }: PreviewState) {
+  const { lang, t } = useI18n()
   const minion = MINIONS_BY_ID.get(id)
   if (!minion) return null
 
+  const comps = COMPS_BY_MINION.get(id) ?? []
+  const height = CARD_HEIGHT + (comps.length ? 16 + comps.length * COMP_LINE_HEIGHT : 0)
+
   return (
-    <div
-      className="card-preview"
-      style={{ ...position(anchor), width: CARD_WIDTH, height: CARD_HEIGHT }}
-      role="tooltip"
-    >
-      <CardImage minion={minion} />
+    <div className="card-preview" style={{ ...position(anchor, height), width: CARD_WIDTH }} role="tooltip">
+      <div style={{ height: CARD_HEIGHT }}>
+        <CardImage minion={minion} />
+      </div>
+      {comps.length > 0 && (
+        <ul className="card-preview__comps">
+          {comps.map((comp) => (
+            <li key={comp.id} className="card-preview__comp">
+              <span>{t('keyIn')}</span> {compName(comp, lang)}
+              <span className="card-preview__tier">{tierLabel(comp.tier)}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }

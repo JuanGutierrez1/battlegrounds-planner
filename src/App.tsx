@@ -1,11 +1,12 @@
 import { Board } from './components/Board'
 import { CardPreviewProvider } from './components/CardPreview'
+import { CompsPanel } from './components/CompsPanel'
 import { LangSwitch } from './components/LangSwitch'
 import { MinionList } from './components/MinionList'
 import { useBoard } from './hooks/useBoard'
 
 export default function App() {
-  const { board, add, place, remove, move, clear } = useBoard()
+  const { board, add, place, remove, move, clear, load } = useBoard()
 
   return (
     <CardPreviewProvider>
@@ -16,7 +17,10 @@ export default function App() {
         </header>
         <main className="app__main">
           <MinionList onAdd={add} />
-          <Board board={board} onPlace={place} onMove={move} onRemove={remove} onClear={clear} />
+          <div className="app__workspace">
+            <Board board={board} onPlace={place} onMove={move} onRemove={remove} onClear={clear} />
+            <CompsPanel onAdd={add} onLoad={load} />
+          </div>
         </main>
       </div>
     </CardPreviewProvider>

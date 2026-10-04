@@ -141,7 +141,7 @@ export function MinionList({ onAdd }: Props) {
                   onClick={() => onAdd(m.id)}
                   {...preview.hover(m.id)}
                 >
-                  <MinionIcon minion={m} />
+                  <MinionIcon minion={m} markKey />
                 </li>
               ))}
             </ul>

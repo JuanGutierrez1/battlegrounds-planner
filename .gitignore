@@ -7,3 +7,6 @@ dist
 !.vscode/extensions.json
 .idea
 .claude
+
+# Comps importados de HSReplay: uso personal, no se suben al repo
+src/data/comps.json
